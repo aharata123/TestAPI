@@ -17,123 +17,123 @@ namespace TestAPI.Api
     [ApiController]
     public class MembersController : ControllerBase
     {
-        private readonly SWD_SlicingPieProjectContext _context;
-        public MembersController(SWD_SlicingPieProjectContext context)
-        {
-            _context = context;
-        }
+        //    private readonly SWD_SlicingPieProjectContext _context;
+        //    public MembersController(SWD_SlicingPieProjectContext context)
+        //    {
+        //        _context = context;
+        //    }
 
-        // GET: api/<MembersController>
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Member>>> Get()
-        {
-            var members = from m in _context.Members.Include(m => m.Company).Include(m => m.Role).Include(m => m.Status).Include(m => m.Assets)
-                          select new MemberDTO()
-                          {
-                              MemberId = m.MemberId,
-                              Account = m.Account,
-                              Name = m.Name,
-                              Email = m.Email,
-                              PhoneNo = m.PhoneNo,
-                              Job = m.Job,
-                              MarketSalary = m.MarketSalary,
-                              Salary = m.Salary,
-                              CompanyName = m.Company.CompanyName,
-                              Role = m.Role.NameRole,
-                              Status = m.Status.StatusName,
-                              Assets = (from a in _context.Assets
-                                        where a.MemberId == m.MemberId
+        //    // GET: api/<MembersController>
+        //    [HttpGet]
+        //    public async Task<ActionResult<IEnumerable<Member>>> Get()
+        //    {
+        //        var members = from m in _context.Members.Include(m => m.Company).Include(m => m.Role).Include(m => m.Status).Include(m => m.Assets)
+        //                      select new MemberDTO()
+        //                      {
+        //                          MemberId = m.MemberId,
+        //                          Account = m.Account,
+        //                          Name = m.Name,
+        //                          Email = m.Email,
+        //                          PhoneNo = m.PhoneNo,
+        //                          Job = m.Job,
+        //                          MarketSalary = m.MarketSalary,
+        //                          Salary = m.Salary,
+        //                          CompanyName = m.Company.CompanyName,
+        //                          Role = m.Role.NameRole,
+        //                          Status = m.Status.StatusName,
+        //                          Assets = (from a in _context.Assets
+        //                                    where a.MemberId == m.MemberId
 
-                                        select new AssetDTO
-                                        {
-                                            Description = a.Description,
-                                            Quantity = a.Quantity,
-                                            TimeAsset = a.TimeAsset
-                                        }).ToList()
-                          };
-            return Ok(members);
-        }
+        //                                    select new AssetDTO
+        //                                    {
+        //                                        Description = a.Description,
+        //                                        Quantity = a.Quantity,
+        //                                        TimeAsset = a.TimeAsset
+        //                                    }).ToList()
+        //                      };
+        //        return Ok(members);
+        //    }
 
-        [SwaggerOperation(Description = "Return membersssssss")]
-        // GET api/<MembersController>/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<MemberDTO>> Get(string id)
-        {
-            var member = await _context.Members.Include(m => m.Company).Include(m => m.Role).Include(m => m.Status).Include(m => m.Assets).
-                Select(m =>
-             new MemberDTO()
-             {
-                 MemberId = m.MemberId,
-                 Account = m.Account,
-                 Name = m.Name,
-                 Email = m.Email,
-                 PhoneNo = m.PhoneNo,
-                 Job = m.Job,
-                 MarketSalary = m.MarketSalary,
-                 Salary = m.Salary,
-                 CompanyName = m.Company.CompanyName,
-                 Role = m.Role.NameRole,
-                 Status = m.Status.StatusName,
-                 Assets = (from a in _context.Assets
-                           where a.MemberId == m.MemberId
-                           select new AssetDTO
-                           {
-                               Description = a.Description,
-                               Quantity = a.Quantity,
-                               TimeAsset = a.TimeAsset
-                           }).ToList()
-             }).SingleOrDefaultAsync(m => m.MemberId == id);
+        //    [SwaggerOperation(Description = "Return membersssssss")]
+        //    // GET api/<MembersController>/5
+        //    [HttpGet("{id}")]
+        //    public async Task<ActionResult<MemberDTO>> Get(string id)
+        //    {
+        //        var member = await _context.Members.Include(m => m.Company).Include(m => m.Role).Include(m => m.Status).Include(m => m.Assets).
+        //            Select(m =>
+        //         new MemberDTO()
+        //         {
+        //             MemberId = m.MemberId,
+        //             Account = m.Account,
+        //             Name = m.Name,
+        //             Email = m.Email,
+        //             PhoneNo = m.PhoneNo,
+        //             Job = m.Job,
+        //             MarketSalary = m.MarketSalary,
+        //             Salary = m.Salary,
+        //             CompanyName = m.Company.CompanyName,
+        //             Role = m.Role.NameRole,
+        //             Status = m.Status.StatusName,
+        //             Assets = (from a in _context.Assets
+        //                       where a.MemberId == m.MemberId
+        //                       select new AssetDTO
+        //                       {
+        //                           Description = a.Description,
+        //                           Quantity = a.Quantity,
+        //                           TimeAsset = a.TimeAsset
+        //                       }).ToList()
+        //         }).SingleOrDefaultAsync(m => m.MemberId == id);
 
-            if (member == null)
-            {
-                return NotFound();
-            }
+        //        if (member == null)
+        //        {
+        //            return NotFound();
+        //        }
 
-            return Ok(member);
-        }
+        //        return Ok(member);
+        //    }
 
-        //POST api/<MembersController>
-        [HttpPost]
-        public async Task<ActionResult<Member>> Create(Member model)
-        {
+        //    //POST api/<MembersController>
+        //    [HttpPost]
+        //    public async Task<ActionResult<Member>> Create(Member model)
+        //    {
 
-            _context.Members.Add(model);
-            await _context.SaveChangesAsync();
-
-
-            return CreatedAtAction(nameof(Get), new { id = model.MemberId }, model);
-        }
+        //        _context.Members.Add(model);
+        //        await _context.SaveChangesAsync();
 
 
-        // PUT api/<MembersController>/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id,Member  model)
-        {
-            if (id != model.MemberId)
-            {
-                return BadRequest();
-            }
+        //        return CreatedAtAction(nameof(Get), new { id = model.MemberId }, model);
+        //    }
 
-            _context.Entry(model).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+        //    // PUT api/<MembersController>/5
+        //    [HttpPut("{id}")]
+        //    public async Task<IActionResult> Update(string id,Member  model)
+        //    {
+        //        if (id != model.MemberId)
+        //        {
+        //            return BadRequest();
+        //        }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
-        {
-            var member = await _context.Members.FindAsync(id);
+        //        _context.Entry(model).State = EntityState.Modified;
+        //        await _context.SaveChangesAsync();
 
-            if (member == null)
-            {
-                return NotFound();
-            }
+        //        return NoContent();
+        //    }
 
-            _context.Members.Remove(member);
-            await _context.SaveChangesAsync();
+        //    [HttpDelete("{id}")]
+        //    public async Task<IActionResult> Delete(string id)
+        //    {
+        //        var member = await _context.Members.FindAsync(id);
 
-            return NoContent();
-        }
+        //        if (member == null)
+        //        {
+        //            return NotFound();
+        //        }
+
+        //        _context.Members.Remove(member);
+        //        await _context.SaveChangesAsync();
+
+        //        return NoContent();
+        //    }
     }
 }

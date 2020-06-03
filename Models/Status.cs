@@ -7,12 +7,12 @@ namespace TestAPI.Models
     {
         public Status()
         {
-            Members = new HashSet<Member>();
+            StackHolders = new HashSet<StackHolder>();
         }
 
         public string StatusId { get; set; }
         public string StatusName { get; set; }
 
-        public virtual ICollection<Member> Members { get; set; }
+        public virtual ICollection<StackHolder> StackHolders { get; set; }
     }
 }

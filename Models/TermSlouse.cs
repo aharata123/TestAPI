@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace TestAPI.Models
 {
-    public partial class Project
+    public partial class TermSlouse
     {
-        public Project()
+        public TermSlouse()
         {
             ProjectDetails = new HashSet<ProjectDetail>();
             SliceAssets = new HashSet<SliceAsset>();
         }
 
-        public string ProjectId { get; set; }
-        public string ProjectName { get; set; }
-        public string ProjectStatus { get; set; }
+        public int TermId { get; set; }
+        public DateTime TermTimeFrom { get; set; }
+        public DateTime TermTimeTo { get; set; }
         public string CompanyId { get; set; }
 
         public virtual Company Company { get; set; }
