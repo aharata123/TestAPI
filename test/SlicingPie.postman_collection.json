@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "b6ea82ef-9f8b-4a79-976c-eec76b93e46c",
+		"name": "SlicingPie",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://slicingpie.azurewebsites.net/api/companies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0ca3b156-4525-4c7f-a292-45dfe82f3170",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://slicingpie.azurewebsites.net/api/companies",
+					"protocol": "https",
+					"host": [
+						"slicingpie",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"companies"
+					],
+					"query": [
+						{
+							"key": "companyId",
+							"value": "testuso",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Get company"
+			},
+			"response": []
+		},
+		{
+			"name": "https://slicingpie.azurewebsites.net/api/companies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0ca3b156-4525-4c7f-a292-45dfe82f3170",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://slicingpie.azurewebsites.net/api/companies/bs101",
+					"protocol": "https",
+					"host": [
+						"slicingpie",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"companies",
+						"bs101"
+					],
+					"query": [
+						{
+							"key": "companyId",
+							"value": "testuso",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Get specific company"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
